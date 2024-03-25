@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}} - {{utilisateur.nom}} {{utilisateur.prenom}}{% endblock %}
+
+{% block body %}
+<h1>{{utilisateur.nom}} {{utilisateur.prenom}}</h1>
+{% endblock %}

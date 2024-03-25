@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Librairie{% endblock %}
+
+{% block body %}
+<h1>Librairie</h1>
+    {% if librairie|length == 0 %}
+        <p class="text-secondary">Librairie vide</p>
+    {% else %}
+        <ul class="list-group mb-2">
+        {% for jeu in librairie %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href="{{ path('app_ficheJeu', {'id': jeu.id}) }}">
+                    <h5 class="mb-0">{{jeu.titre}}</h5>
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
+{% block javascripts %}
+    {% include "include/_modalSuppr.html.twig" %}
+{% endblock %}

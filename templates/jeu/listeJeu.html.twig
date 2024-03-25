@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catalogue{% endblock %}
+
+{% block body %}
+   <h1 class="text-center text-2xl">Catalogue</h1>
+    <div class="row">
+    {% for jeu in jeux %}
+        {% set editeur = jeu.editeur %}
+            <div class="col-4 p-2">
+                <div class="w-100">
+                    <div class="w-100">
+                        <img src="https://lesplayersdudimanche.com/wp-content/uploads/2023/10/Super-Mario-Bros.-Wonder-cover.jpg" class="w-100 rounded img-thumbnail" alt="">
+                    </div>
+                    <div class="mb-3">
+                        <div class="mb-2 d-flex flex-column">
+                            <a href="{{ path('app_ficheJeu', {'id': jeu.id}) }}" class="flex-fill">
+                                <h4>{{ jeu.titre }}</h4>
+                            </a>
+                            <p>{{ jeu.prix|number_format(2, '.') }}€ <br>
+                            <a href="{{path('fiche_editeur', {'id': jeu.editeur.id})}}" class="text-secondary">By {{ editeur.nom }}</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    {% endfor %}
+    </div>
+        <div class="row justify-content-center">
+        <div class="navigation px-auto">
+        {{ knp_pagination_render(jeux) }}
+        </div>
+    </div>
+{% endblock %}

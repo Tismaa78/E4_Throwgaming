@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiche Editeur{% endblock %}
+
+{% block body %}
+
+<h1 class="h3 mb-5">Fiche de l'éditeur</h1>
+<div class="rounded-md shadow-lg border border-secondary p-4">
+    <div class="d-flex flex-column gap-4 align-items-center">
+        <img src={{ leEditeur.logo }}
+            class="img-fluid rounded shadow-sm mw-100"
+            draggable="false"
+            alt="Logo de l'éditeur"
+        />
+        <div class="w-100">
+            <h1>{{ leEditeur.nom }}</h1>
+            <hr>
+            <h3 style="font-variant: small-caps;">Description</h3>
+            <p class="text-justify">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, itaque. Totam veniam atque
+                asperiores distinctio, enim repellat explicabo fugiat, laboriosam, deserunt quas impedit illo? Eos
+                dolorum aliquid voluptatum dignissimos ipsa?
+            </p>
+            <hr class="my-4">
+        </div>
+
+        <div class="table-responsive">
+            <table class="table text-sm text-left">
+                <thead class="text-uppercase bg-light">
+                    <tr>
+                        <th scope="col">Jeu</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Prix</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for jeu in leEditeur.jeux %}
+                    <tr class="bg-dark text-white">
+                        <th scope="row" class="font-weight-medium">
+                            <a href="{{ path('app_ficheJeu', {'id': jeu.id}) }}">{{ jeu.titre }}</a>
+                        </th>
+                        <td>{{ jeu.date }}</td>
+                        <td>{{ jeu.prix }}€</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

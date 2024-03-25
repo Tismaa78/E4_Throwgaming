@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Formulaire Consolex{% endblock %}
+
+{% block stylesheets %}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+<h1>Formulaire Console</h1>
+{{ form_start(formConsole) }}
+<div class="flex flex-col">
+    {{ form_row(formConsole.nom, {'label' : "Titre"}) }}
+   {{ form_row(formConsole.image, {'label' : "Image"}) }}
+    {{ form_row(formConsole.date, {'label' : "Année"}) }}
+</div>
+<input type="submit" class="btn btn-success" value="valider">
+{{ form_end(formConsole) }}
+{% endblock %}
+
+{% block javascripts %}
+    <script
+              src="https://code.jquery.com/jquery-3.7.1.js"
+              integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+              crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('.selection').select2();
+});
+</script>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% macro tag(libelle, couleur) %}
+	{% set dot = 8 %}
+	<a class="badge text-bg-light border d-inline-flex gap-1 align-items-center" style="text-decoration: none; max-width: fit-content;" href="{{ path('app_jeu_filtre', {'genre': libelle}) }}">
+		<div class="mr-1" style="border-radius: 100px; background-color: {{couleur}}; height: {{dot}}px; width: {{dot}}px;">
+			{# <svg height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+				<circle cx="50%" cy="50%" r="0.45em" fill="{{couleur}}"/>
+			</svg> #}
+		</div>
+		{{ libelle }}
+	</a>
+{% endmacro %}

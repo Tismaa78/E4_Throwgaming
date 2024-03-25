@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiche Console{% endblock %}
+
+{% block body %}
+
+<h1 class="text-3xl mb-5">Fiche de la Console</h1>
+<div class="rounded-md shadow-lg overflow-hidden border border-gray-600/25">
+	<div class="p-5 flex flex-col gap-5 items-center">
+		<img src="{{console.image}}"
+		class="rounded-md shadow-md sm:w-[320px] lg:w-[640px] text-center"
+		draggable="false"
+		/>
+		<div class="w-full">
+			<h1 class="text-2xl font-black">{{ console.nom }}</h1>
+			<hr class="my-4">
+			<h3 class="font-bold text-md text-gray-600" style="font-variant: small-caps;">Description</h3>
+			<p class="text-justify leading-relaxed">
+				Lorem ipsum dolor sit amet consectetur adipisicing, elit. Repellendus, itaque. Totam veniam atque asperiores distinctio, enim repellat explicabo fugiat, laboriosam, deserunt quas impedit illo? Eos dolorum aliquid voluptatum dignissimos ipsa?
+			</p>
+            <hr class="my-4">
+			<h3 class="font-bold text-md text-gray-600" style="font-variant: small-caps;">Date de sortie</h3>
+			<p class="text-justify leading-relaxed">{{console.date}}</p>
+            <hr class="my-4">
+
+	</div>
+    
+    <div class="relative overflow-x-auto w-full">
+    <table class="w-full text-sm text-left rtl:text-right text-black-500 dark:text-blue-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 light:bg-gray-700 dark:text-red-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Jeu
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Editeur
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Date
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Prix
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for jeu in console.jeux %}
+            <tr class="bg-dark border-b white:bg-gray-800 dark:border-dark-700">
+                <th scope="row" class="px-6 py-4 font-medium text-green-900 whitespace-nowrap dark:text-dark">
+                    <a href="{{ path('app_ficheJeu', {'id': jeu.id}) }}">{{jeu.titre}}</a>
+                </th>
+                <td class="px-6 py-4">
+                    <a href="{{ path('fiche_editeur', {'id': jeu.editeur.id}) }}">{{jeu.editeur.nom}}</a>
+                </td>
+                <td class="px-6 py-4">
+                    {{jeu.date }}
+                </td>
+                <td class="px-6 py-4">
+                    {{jeu.prix}}€
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+    
+    
+</div>
+
+{% endblock %}

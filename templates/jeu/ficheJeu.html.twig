@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+{% import "include/components.html.twig" as compos %}
+
+{% block title %}Fiche Jeu{% endblock %}
+
+{% block body %}
+
+<h1>Fiche du Jeu</h1>
+{# game card #}
+<div class="container-fluid rounded shadow border d-flex flex-column gap-5 p-3">
+	{# contenu #}
+	{% if jeu.image != null %}
+		{# image principale #}
+		<img src="{{jeu.image}}"
+		class="img-thumbnail"
+		draggable="false"
+		/>
+	{% endif %}
+	
+	{# game info #}
+	<div class="w-100">
+		<h1>{{ jeu.titre }}</h1>
+		<a href="{{path('fiche_editeur', {'id':jeu.editeur.id})}}" class="text-secondary"><u>{{ jeu.editeur.nom }}</u></a>
+		{{ compos.tag(jeu.genre.libelle, jeu.genre.couleur) }} <br>
+		<span class="text-secondary">{{ jeu.ventes }} copies vendues</span>
+		{# description #}
+		<div class="bg-light border p-2 my-2 rounded">
+			<h5 class="text-secondary"><u>Description :</u></h5>
+			<p class="text-justify">
+				{% if jeu.description == null %}
+					Aucune description
+				{% else %}
+					{{jeu.description}}
+				{% endif %}
+			</p>
+		</div>
+		{# menu achat #}
+		<div class="d-flex gap-2">
+			{% if hasGame %}
+				<button type="button" class="btn btn-success" disabled>Déjà possédé</button>
+			{% else %}
+				<a href="{{path('app_panier_add', {'id': jeu.id})}}" class="btn btn-success">Ajouter au panier</a>
+			{% endif %}
+			<span class="btn btn-light border">
+				{{ jeu.prix|number_format(2, '.') }}€
+			</span>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

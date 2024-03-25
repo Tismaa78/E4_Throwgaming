@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+{% set utilisateur = app.user %}
+
+{% block title %}{{ parent() }} - Accueil{% endblock %}
+
+{% block body %}
+    {# données sur le site #}
+    <section class="">
+        <h2>ThrowGaming en quelques nombres, c'est...</h2>
+        <div class="d-flex flex-wrap text-center" style="gap: 1rem;">
+            {# une colone #}
+            <div class="w-100 bg-light-subtle border shadow-sm rounded p-3">
+                <h2>{{ cptJeux }} jeux différents</h2>
+            </div>
+            {# deux colones #}
+            <div class="w-100 d-flex" style="gap: 1rem;">
+                <div class="w-50 bg-light-subtle border shadow-sm rounded p-3">
+                    <h2>{{ genres|length }} genres</h2>
+                </div>
+                <div class="w-50 bg-light-subtle border shadow-sm rounded p-3">
+                    <h2>{{ cptCons }} consoles</h2>
+                </div>
+            </div>
+            <div class="w-100 bg-light-subtle border shadow-sm rounded p-3">
+                <h2>{{ cptEdit }} éditeurs nous font confiance</h2>
+            </div>
+        </div>
+    </section>
+
+    {# liste des genres disponibles #}
+    <section class="mt-5">
+        <h2>Genres</h2>
+        <div class="row">
+            {% for genre in genres %}
+                <a class="col" style="min-width: 15rem;" href="{{ path('app_jeu_filtre', {'genre': genre.libelle}) }}">
+                    <div>
+                        <h3>{{ genre.libelle }}</h3>
+                        <h5>
+                        {% set nbJeux = genre.jeux|length %}
+                        {{ nbJeux }}
+                        {% if nbJeux > 1 %}
+                            jeux
+                        {% else %}
+                            jeu
+                        {% endif %}
+                        </h5>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

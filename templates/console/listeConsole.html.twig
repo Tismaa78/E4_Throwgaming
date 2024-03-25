@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste Console{% endblock %}
+
+{% block body %}
+<h1 class="text-3xl font-black uppercase">Liste des Consoles</h1>
+
+
+    <div class="ligne flex flex-row grid grid-cols-5 gap-4">
+    {% for  laConsole in lesConsoles  %}
+            <div class="!z-5 relative flex flex-col rounded-[20px] max-w-[300px] bg-white bg-clip-border shadow-3xl shadow-shadow-500 flex flex-col w-full !p-4 3xl:p-![18px] bg-white undefined">
+                <div class="h-full w-full">
+                    <div class="relative w-full">
+                        <img src="{{laConsole.image}}" alt="">
+                    </div>
+                    <div class="mb-3 flex items-center justify-between px-1 md:items-start">
+                        <div class="mb-2">
+                            <p class="text-lg font-bold text-navy-700"><a href="{{path('app_ficheConsole', {'id': laConsole.id} )}}">{{laConsole.Nom}}</a></p>
+                            <p class="mt-1 text-sm font-medium text-gray-600 md:mt-2">{{laConsole.Date}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    {% endfor %}
+    </div>
+{% endblock %}

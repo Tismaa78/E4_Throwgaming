@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Formulaire Genre{% endblock %}
+
+{% block stylesheets %}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+<h1>Formulaire Genres</h1>
+{{ form_start(formGenre) }}
+<div class="flex flex-col">
+    {{ form_row(formGenre.libelle, {'label' : "Libelle"}) }}
+    {{ form_row(formGenre.couleur, {'label' : "Couleur"}) }}
+</div>
+<input type="submit" class="btn btn-success" value="valider">
+{{ form_end(formGenre) }}
+{% endblock %}

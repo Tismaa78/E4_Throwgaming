@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Editeurs{% endblock %}
+
+{% block body %}
+  <h1 class="text-3xl font-black uppercase">Liste des Editeurs</h1>
+
+  <div class="row" style="display: flex; flex-wrap: wrap;">
+    {% for editeur in lesEditeurs %}
+      <div class="card-container mb-3 mx-auto" style="max-width: 20rem; min-width: 20rem;">
+        <div class="card px-0">
+          <div class="card-header">
+            <a href="{{ path('fiche_editeur', {'id': editeur.id}) }}">
+              {{ editeur.nom | slice(0, 21) }}
+              {% if editeur.nom | length > 21 %}&hellip;{% endif %}
+            </a>
+          </div>
+          <div class="card-body">
+            {% if editeur.logo == null %}
+              <div class="relative w-full">
+                <img src="https://i.ytimg.com/vi/_DHq_NxEq8Q/maxresdefault.jpg" class="mb-3 h-full w-full rounded-xl 3xl:h-full 3xl:w-full" alt="">
+              </div>
+            {% else %}
+              <div>
+                <img src={{editeur.logo}} class="img-fluid" alt="">
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="navigation mx-auto d-flex justify-content-center">
+    {{ knp_pagination_render(lesEditeurs) }}
+  </div>
+{% endblock %}

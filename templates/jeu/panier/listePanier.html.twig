@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+{% set total = 0 %}
+{% block title %}{{ parent() }} - Panier{% endblock %}
+
+{% block body %}
+<h1>Panier</h1>
+    {% if panier|length == 0 %}
+        <p class="text-secondary">Panier vide</p>
+    {% else %}
+        <div class="container-fluid row">
+            <ul class="list-group mb-2 col">
+            {% for jeu in panier %}
+                {% set total = total + jeu.prix %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div class="d-flex flex-grow-1 align-items-baseline">
+                        <a href="{{ path('app_ficheJeu', {'id': jeu.id}) }}">
+                            <h5 class="mb-0 me-3">{{jeu.titre}}</h5>
+                        </a>
+                        <span class="text-secondary">{{jeu.prix|number_format(2, '.')}}€</span>
+                    </div>
+                    <a href='#' 
+                        data-toggle='modal' 
+                        data-target='#confirmSuppr'
+                        data-titre="Retirer du panier"
+                        data-message="Êtes-vous sûr de vouloir retirer ce jeu ?"
+                        data-libelleConf="Confirmer"
+                        data-lien="{{ path('app_panier_rem', {'id': jeu.id}) }}"
+                        class='btn btn-danger btn-sm'
+                        role='button'><i class="fa-solid fa-minus"></i>
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+            <div class="col-4">
+                <div class="p-3 bg-light border rounded mb-2">
+                    <h5 class="mb-0">Prix Total : {{total|number_format(2, '.')}}€</h5>
+                </div>
+                <p class="text-secondary"><em>
+                Il n'y a pas d'écran de transaction en raison de la nature de ce projet.
+                Les éléments du panier seront directement ajoutés à la librairie lors de
+                la validation.
+                </em></p>
+            </div>
+        </div>
+    {% endif %}
+    {% if panier|length > 0 %}
+        <a href="{{path('app_panier_validate')}}" class="btn btn-success">Valider le panier</a>
+        <a href="{{path('app_panier_clear')}}" class="btn btn-danger">Vider le panier</a>
+    {% else %}
+        <button type="button" class="btn btn-success" disabled>Valider le panier</button>
+        <button type="button" class="btn btn-danger" disabled>Vider le panier</button>
+    {% endif %}
+{% endblock %}
+{% block javascripts %}
+    {% include "include/_modalSuppr.html.twig" %}
+{% endblock %}

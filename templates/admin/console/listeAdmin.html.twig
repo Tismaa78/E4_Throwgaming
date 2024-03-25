@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Gestion Console{% endblock %}
+
+{% block body %}
+<div class="flex flex-col gap-2">
+<a class="display-block p-1 my-2 bg-green-500 text-white rounded" href="{{path('app_admin_console_ajout')}}">Ajouter une Console</a>
+    {% for console in lesConsoles %}
+        <div class="flex flex-row gap-2 items-center p-2 border border-black/25 rounded-lg">
+            <span class="self-start">
+            {% if console.image == null %}
+                <svg height="32" width="32">
+                    <rect x="0" y="0" width="100%" height="100%" fill="gray" rx="5px" />
+                </svg>
+            {% else %}
+                <img src="{{ console.image }}"
+                class="max-w-[32px] height-[32px] border border-black/25 rounded-[5px]" 
+                draggable="false" />
+            {% endif %}
+            </span>
+            <div class="flex flex-col w-full">
+                <div class="flex flex-row w-full gap-2">
+                    <span>{{ console.nom }}</span>
+                </div>
+                {# <div class="flex flex-row w-full gap-2">
+                    <span>Date :{{lesConsoles.date}}</span>
+                </div> #}
+            </div>
+            <div class="inline-flex">
+                <a href="{{path('app_admin_console_edit', {'id': console.id})}}" class="bg-orange-300 hover:bg-orange-400 text-black-800 font-bold py-2 px-4 rounded-l">
+                    Modifier
+                </a>
+                <a href="{{path('app_admin_console_suppr', {'id': console.id})}}" class="bg-red-300 hover:bg-red-400 text-black-800 font-bold py-2 px-4 rounded-r">
+                    Supprimer
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

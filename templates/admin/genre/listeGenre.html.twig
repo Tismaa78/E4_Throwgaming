@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Gestion Genres {% endblock %}
+
+{# 
+    liste simple des genres
+#}
+
+{% block body %}
+    {# wrapper de la liste #}
+    <h2>Gestion des genres</h2>
+    <a class="btn btn-success" href="{{ path('app_admin_genre_ajout') }}">
+        Ajouter
+    </a>
+    <div class="pt-2">
+        {% for genre in genres %}
+            <div class = "mb-2 d-flex justify-content-between border rounded p-3">
+                <div class="flex-fill">
+                    <svg height="32" width="32">
+                        <rect x="0" y="0" width="100%" height="100%" rx="5px" fill="{{genre.couleur}}" />
+                    </svg>
+                    <span>{{ genre.libelle }}</span>
+                </div>
+                <div class="ml-2 btn-group" role="group">
+                    <a class="btn btn-secondary" href="{{path("app_admin_genre_edit", {'id': genre.id })}}">Modifier</a>
+                    <a href='#' 
+                    data-toggle='modal' 
+                    data-target='#confirmSuppr'
+                    data-titre="Suppression d'un genre"
+                    data-message="Êtes-vous sûr de vouloir supprimer le genre : {{ genre.libelle }}"
+                    data-libelleConf="Supprimer"
+                    data-lien="{{ path('app_admin_genre_suppr', {'id': genre.id}) }}"
+                    class='btn btn-danger' 
+                    role='button'>Supprimer</a>
+                </div>
+            </div>            
+        {% endfor %}
+        </div>
+            <div class="row justify-content-center">
+            <div class="navigation px-auto">
+            {{ knp_pagination_render(genres) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {% include "include/_modalSuppr.html.twig" %}
+{% endblock %}
