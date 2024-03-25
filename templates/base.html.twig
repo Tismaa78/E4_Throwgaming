@@ -1,5 +1,9 @@
 {% set utilisateur = app.user %}
+{% if utilisateur != null %}
 {% set isAdmin = utilisateur.roles[0] == "ROLE_ADMIN" %}
+{% else %}
+{% set isAdmin = false %}
+{% endif %}
 <!DOCTYPE html>
 <html>
     <head>
