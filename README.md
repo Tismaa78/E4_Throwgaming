@@ -10,3 +10,14 @@ La répartion des taches ![Notion](https://i.imgur.com/NRaJ9Km_d.jpg?maxwidth=52
 
 
 La base de données![BDD](https://i.imgur.com/cLsj3cf_d.jpg?maxwidth=520&shape=thumb&fidelity=high)
+
+
+
+
+
+
+Le github![Github](https://i.imgur.com/0dRmO9z_d.jpg?maxwidth=520&shape=thumb&fidelity=high)
+
+
+
+
